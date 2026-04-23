@@ -29,6 +29,7 @@ class ContentTypeCommand extends Command
         {--s|starts-with= : Filter by full_slug prefix (e.g. blog/posts)}
         {--by-slugs= : Comma-separated full_slugs. Supports wildcards: posts/*}
         {--u|by-uuids= : Comma-separated story UUIDs}
+        {--i|by-ids= : Comma-separated story IDs (numeric)}
         {--t|with-tag= : Filter by tag slug(s), comma-separated (OR logic)}
         {--S|search= : Full-text search term across name, slug, and content}
         {--in-workflow-stages= : Comma-separated workflow stage IDs}
@@ -202,6 +203,7 @@ class ContentTypeCommand extends Command
             textSearch: $this->option('search') ?: null,
             sortBy: $sortBy,
             byUuids: $this->option('by-uuids') ?: null,
+            byIds: $this->option('by-ids') ?: null,
             withTag: $this->option('with-tag') ?: null,
             startsWith: $this->option('starts-with') ?: null,
             bySlugs: $this->option('by-slugs') ?: null,

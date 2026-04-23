@@ -52,6 +52,7 @@ php storyblok-cli story:update:content-type {content-type} [options]
 | `--from-content-type=` | `-F` | Only update stories currently using this content type |
 | `--starts-with=` | `-s` | Filter by `full_slug` prefix (e.g. `blog/posts`) |
 | `--by-uuids=` | `-u` | Comma-separated story UUIDs |
+| `--by-ids=` | `-i` | Comma-separated story IDs (numeric) |
 | `--by-slugs=` | | Comma-separated `full_slug` values; supports wildcards (`posts/*`) |
 | `--with-tag=` | `-t` | Filter by tag slug(s), comma-separated (OR logic) |
 | `--search=` | `-S` | Full-text search across name, slug, and content |

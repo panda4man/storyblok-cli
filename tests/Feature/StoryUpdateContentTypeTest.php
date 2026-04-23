@@ -10,6 +10,7 @@ use Storyblok\ManagementApi\Data\StoryComponent;
 use Storyblok\ManagementApi\Endpoints\StoryApi;
 use Storyblok\ManagementApi\Endpoints\StoryBulkApi;
 use Storyblok\ManagementApi\ManagementApiClient;
+use Storyblok\ManagementApi\QueryParameters\StoriesParams;
 use Storyblok\ManagementApi\Response\StoryResponse;
 
 /**
@@ -250,6 +251,23 @@ it('passes no QueryFilters when --from-content-type is omitted', function (): vo
 
     $this->artisan('story:update:content-type', [
         'content-type' => 'new-page',
+        '--token' => 'fake-token',
+        '--space-id' => '12345',
+    ])->assertExitCode(0);
+});
+
+it('passes by_ids to StoriesParams when --by-ids is specified', function (): void {
+    ['bulkApi' => $mockBulkApi] = bindMockFactory($this->app);
+
+    $mockBulkApi->shouldReceive('all')
+        ->withArgs(function (StoriesParams $params): bool {
+            return str_contains((string) json_encode($params->toArray()), '111,222');
+        })
+        ->andReturn(makeStoriesGenerator([]));
+
+    $this->artisan('story:update:content-type', [
+        'content-type' => 'new-page',
+        '--by-ids' => '111,222',
         '--token' => 'fake-token',
         '--space-id' => '12345',
     ])->assertExitCode(0);
